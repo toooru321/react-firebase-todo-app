@@ -31,7 +31,7 @@ function Todo() {
     // console.log(input);
   };
 
-  // これが時間取得
+  // これが時間取得　（サーバ側で取得できない？）
   const toDate = () => {
     let date = new Date();
     const today = date.toDateString();
@@ -51,11 +51,11 @@ function Todo() {
       e.preventDefault();
       DB.collection('todos').add({
         todo: input,
-        time: firebase.firestore.FieldValue.serverTimestamp(),
+        time: firebase.firestore.FieldValue.serverTimestamp(),// これと下の行のちがいは？
         date: toDate(),
       });
       //separate
-      setTodos([...todos, input]);
+      setTodos([...todos, input]);　//ここがtodoリスト登録　セパレートの意味を調べる
       setInput('');
     }
   };
@@ -85,13 +85,13 @@ function Todo() {
           variant="contained"
           color="primary"
           size="large"
-          disabled={!input}
+          disabled={!input}　//ここのdisableの意味　inputが空なら何かしている
         >
-          <CgPlayListAdd className="add-btn" /> Add
+          <CgPlayListAdd className="add-btn" /> Add　
         </Button>
       </form>
 
-      <ul className="todo-list">
+      <ul className="todo-list">　
         {todos.map((todo) => (
           <TodoList key={todo.id} todo={todo} />
         ))}
