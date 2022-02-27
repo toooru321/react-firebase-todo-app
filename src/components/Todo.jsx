@@ -9,14 +9,14 @@ function Todo() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
 
-  // fetch data from firebase
+  // ファイヤーベースからデータ取得　
   useEffect(() => {
-    DB.collection('todos')
+    DB.collection('todos') //ここに自分のコレクション名
       .orderBy('time', 'desc')
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().time));
         setTodos(
-          snapshot.docs.map((doc) => ({
+          snapshot.docs.map((doc) => ({　//ここに自分のアプリの構成に合わせてデータセット
             id: doc.id,
             todo: doc.data().todo,
             date: doc.data().date,
@@ -25,20 +25,20 @@ function Todo() {
       });
   }, []);
 
-  //input todo
+  //ここが仕事登録作業
   const handleChange = (e) => {
     setInput(e.target.value);
     // console.log(input);
   };
 
-  // date
+  // これが時間取得
   const toDate = () => {
     let date = new Date();
     const today = date.toDateString();
     return today;
   };
 
-  // button Add todo
+  // ボタン押したらファーヤーベースに仕事登録
   const addTodos = (e) => {
     // console.log('object');
 
@@ -60,6 +60,7 @@ function Todo() {
     }
   };
 
+  //ここから実際のホームページ
   return (
     <div>
       <h1>
