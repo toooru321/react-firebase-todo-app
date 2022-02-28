@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
 import { CgPlayListAdd } from 'react-icons/cg';
 import TodoList from './TodoList';
-import DB from './db/firebase.js';
+import db from "./db/firebase"
 import firebase from 'firebase';
 
 function Todo() {
