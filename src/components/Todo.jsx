@@ -5,18 +5,20 @@ import TodoList from './TodoList';
 import db from "./db/firebase"
 import firebase from 'firebase';
 
+
 function Todo() {
   const [input, setInput] = useState('');
   const [todos, setTodos] = useState([]);
 
-  // ファイヤーベースからデータ取得　
+  　 //dbにcollectionがなくなってる可能性 リファレンスを読めるようにする
+  　//こっから先の初期化がコピー先でエラーが出る多分上記の理由
   useEffect(() => {
-    DB.collection('todos') //ここに自分のコレクション名
+    DB.collection('todos')
       .orderBy('time', 'desc')
       .onSnapshot((snapshot) => {
         console.log(snapshot.docs.map((doc) => doc.data().time));
         setTodos(
-          snapshot.docs.map((doc) => ({　//ここに自分のアプリの構成に合わせてデータセット
+          snapshot.docs.map((doc) => ({　
             id: doc.id,
             todo: doc.data().todo,
             date: doc.data().date,
